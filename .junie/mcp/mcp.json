@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "C:\\php8\\php.exe",
+            "args": [
+                "N:\\Docker\\docker-lamp\\docker-compose-lamp\\www\\chirper\\artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
