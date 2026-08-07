@@ -28,20 +28,20 @@ foreach ($attributes->all() as $__key => $__value) {
 
 unset($__defined_vars, $__key, $__value); ?>
 
-<div class="card bg-base-100 shadow">
+<div class="card bg-base-100">
     <div class="card-body">
         <div class="flex space-x-3">
             <?php if($chirp->user): ?>
                 <div class="avatar">
                     <div class="size-10 rounded-full">
-                        <img src="<https://avatars.laravel.cloud/><?php echo e(urlencode($chirp->user->email)); ?>"
+                        <img src="https://avatars.laravel.cloud/<?php echo e(urlencode($chirp->user->email)); ?>"
                             alt="<?php echo e($chirp->user->name); ?>'s avatar" class="rounded-full" />
                     </div>
                 </div>
             <?php else: ?>
                 <div class="avatar placeholder">
                     <div class="size-10 rounded-full">
-                        <img src="<https://avatars.laravel.cloud/f61123d5-0b27-434c-a4ae-c653c7fc9ed6?vibe=stealth>"
+                        <img src="https://avatars.laravel.cloud/f61123d5-0b27-434c-a4ae-c653c7fc9ed6?vibe=stealth"
                             alt="Anonymous User" class="rounded-full" />
                     </div>
                 </div>
@@ -59,12 +59,20 @@ unset($__defined_vars, $__key, $__value); ?>
                         <?php endif; ?>
                     </div>
 
+                    <!-- Replace the temporary @php block and $canEdit check with: -->
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update', $chirp)): ?>
                         <div class="flex gap-1">
-                            <a href="/chirps/<?php echo e($chirp->id); ?>/edit" class="btn btn-ghost btn-xs"> Edit </a>
-                            <form method="POST" action="/chirps/<?php echo e($chirp->id); ?>"> <?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?> <button
-                                    type="submit" onclick="return confirm('Are you sure you want to delete this chirp?')"
-                                    class="btn btn-ghost btn-xs text-error"> Delete </button>
+                            <a href="/chirps/<?php echo e($chirp->id); ?>/edit" class="btn btn-ghost btn-xs">
+                                Edit
+                            </a>
+                            <form method="POST" action="/chirps/<?php echo e($chirp->id); ?>">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
+                                <button type="submit"
+                                    onclick="return confirm('Are you sure you want to delete this chirp?')"
+                                    class="btn btn-ghost btn-xs text-error">
+                                    Delete
+                                </button>
                             </form>
                         </div>
                     <?php endif; ?>

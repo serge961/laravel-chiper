@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Chirp;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
 class ChirpController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
