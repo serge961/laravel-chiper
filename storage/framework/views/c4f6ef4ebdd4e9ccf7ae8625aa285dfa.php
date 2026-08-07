@@ -59,20 +59,15 @@ unset($__defined_vars, $__key, $__value); ?>
                         <?php endif; ?>
                     </div>
 
-                    <div class="flex gap-1">
-                        <a href="/chirps/<?php echo e($chirp->id); ?>/edit" class="btn btn-ghost btn-xs">
-                            Edit
-                        </a>
-                        <form method="POST" action="/chirps/<?php echo e($chirp->id); ?>">
-                            <?php echo csrf_field(); ?>
-                            <?php echo method_field('DELETE'); ?>
-                            <button type="submit"
-                                onclick="return confirm('Are you sure you want to delete this chirp?')"
-                                class="btn btn-ghost btn-xs text-error">
-                                Delete
-                            </button>
-                        </form>
-                    </div>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update', $chirp)): ?>
+                        <div class="flex gap-1">
+                            <a href="/chirps/<?php echo e($chirp->id); ?>/edit" class="btn btn-ghost btn-xs"> Edit </a>
+                            <form method="POST" action="/chirps/<?php echo e($chirp->id); ?>"> <?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?> <button
+                                    type="submit" onclick="return confirm('Are you sure you want to delete this chirp?')"
+                                    class="btn btn-ghost btn-xs text-error"> Delete </button>
+                            </form>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <p class="mt-1"><?php echo e($chirp->message); ?></p>
             </div>
